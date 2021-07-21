@@ -1,0 +1,30 @@
+# Application
+public_html/app/plugins/*
+public_html/app/mu-plugins/*/
+public_html/app/upgrade
+public_html/app/uploads/*
+!public_html/app/uploads/.gitkeep
+
+# WordPress
+public_html/wp
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor
+
+# WP-CLI
+wp-cli.local.yml
+
+dependencies.yml
+php-errors.log
+public_html/php-errors.log
+log
+php_errorlog
+object-cache.php
+php-info.php
+
+
