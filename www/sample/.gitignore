@@ -9,7 +9,6 @@ public_html/app/uploads/*
 public_html/wp
 
 # Dotenv
-.env
 .env.*
 !.env.example
 
