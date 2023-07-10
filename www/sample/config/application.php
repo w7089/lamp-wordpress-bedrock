@@ -9,22 +9,21 @@
  */
 
 use Roots\WPConfig\Config;
+use function Env\env;
 
 /** @var string Directory containing all of the site's files */
 $root_dir = dirname(__DIR__);
 
-/** @var string Document Root */
-$webroot_dir = $root_dir . '/public_html';
-
-/**
- * Expose global env() function from oscarotero/env
- */
-Env::init();
-
 /**
  * Use Dotenv to set required environment variables and load .env file in root
  */
-$dotenv = Dotenv\Dotenv::create($root_dir);
+$webroot_dir = $root_dir . '/public_html';
+$env_files = file_exists($root_dir . '/.env.local')
+    ? ['.env', '.env.local']
+    : ['.env'];
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
+
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME', 'WP_SITEURL']);
@@ -32,7 +31,6 @@ if (file_exists($root_dir . '/.env')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
 }
-
 /**
  * Set up our global environment constant and load its config first
  * Default: production
